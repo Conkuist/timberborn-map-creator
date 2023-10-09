@@ -1,6 +1,6 @@
 # Timberborn Map Creator
 
-Creates world.json files for Timberborn.
+Creates `world.json` files for Timberborn.
 
 To use the `world.json` files in Timberborn,
 
