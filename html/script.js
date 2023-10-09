@@ -13,22 +13,33 @@ function World(x,y)
     this.Singletons = {};
     this.Entities = [];
 
-    this.SetGameVersion = (g) => {
+    this.setGameVersion = (g) => {
         
         this.GameVersion = g;
     }
-    this.SetTimeStamp = (d) => {
+    this.setTimeStamp = (d) => {
         
         this.Timestamp = d.toTimestamp();
     }
-    this.SetSingletons = (x,y) => {
+    this.setSingletons = (x,y) => {
         
-        this.Singletons = new Singletons(x,y)
+        this.Singletons = new Singletons(x,y);
     }
 
-    this.SetGameVersion("0.5.0.2-d3e4ac7-xsw");
-    this.SetTimeStamp(new Date());
-    this.SetSingletons(x,y);
+    this.setGameVersion("0.5.0.2-d3e4ac7-xsw");
+    this.setTimeStamp(new Date());
+    this.setSingletons(x,y);
+
+    this.toObject = () => {
+
+        return {
+
+            "GameVersion": this.GameVersion,
+            "TimeStamp": this.Timestamp,
+            "Singletons": this.Singletons.toObject(),
+            "Entities": this.Entities
+        }
+    }
 
 }
 
@@ -80,38 +91,88 @@ function Singletons(x,y)
     this.SetSoilMoistureSimulator(x,y);
     this.SetSoilContaminationSimulator(x,y);
     this.SetMapThumbnailCameraMover();
+
+    this.toObject = () => {
+
+        return {
+
+            "MapSize" : this.MapSize,
+            "TerrainMap": this.TerrainMap.toObject(),
+            "WaterMap": this.WaterMap.toObject(),
+            "ContaminationMap": this.ContaminationMap.toObject(),
+            "SoilMoistureSimulator": this.SoilMoistureSimulator.toObject(),
+            "SoilContaminationSimulator": this.SoilContaminationSimulator.toObject(),
+            "MapThumbnailCameraMover": this.MapThumbnailCameraMover,
+        }
+    }
 }
 
 // functions for MapSize
 
 function MapSize(x,y) {
 
-    this.Size = new Size(x,y);
+    this.setSize = (x,y) => {
+        
+        this.Size = new Size(x,y)
+    }
+
+    this.setSize(x,y);
 }
 
 function Size(x,y) {
 
-    this.X = x;
-    this.Y = y;
+    this.setX = (x) => {
+
+        this.X = x;
+    }
+
+    this.setY = (y) => {
+
+        this.Y = y;
+    }
+
+    this.setX(x);
+    this.setY(y);
 }
 
 // functions for TerrainMap
 
 function TerrainMap(x,y) {
 
-    this.Heights = new Heights(x,y);
+    this.setHeights = (x,y) => {
+
+        this.Heights = new Heights(x,y);
+    }
+
+    this.setHeights(x,y)
+
+    this.toObject = () => {
+
+        return {
+
+            "Heights": this.Heights.toObject()
+        }
+    }
 
 }
 
 function Heights(x,y) {
 
-    this.SetArray = (x,y,z) => {
+    this.setArray = (x,y,z) => {
 
-        this.Array = CreateArray(x,y,z);
+        this.Array = new ArrayData(x,y,z);
 
     }
 
-    this.SetArray(x,y,0);
+    this.setArray(x,y,0);
+
+    this.toObject = () => {
+
+        return {
+
+            "Array": this.Array.toString()
+        }
+    }
 }
 
 // functions for WaterMap
@@ -120,60 +181,127 @@ function WaterMap(x,y) {
 
     this.WaterDepths = new WaterDepths(x,y);
     this.Outflows = new Outflows(x,y);
+
+    this.toObject = () => {
+
+        return {
+
+            "WaterDepths": this.WaterDepths.toObject(),
+            "Outflows": this.Outflows.toObject()
+        }
+    }
 }
 
 function WaterDepths(x,y) {
 
-    this.SetArray = (x,y,z) => {
+    this.setArray = (x,y,z) => {
         
-        this.Array = CreateArray(x,y,z);
+        this.Array = new ArrayData(x,y,z);
     }
 
-    this.SetArray(x,y,0);
+    this.setArray(x,y,0)
+
+    this.toObject = () => {
+
+        return {
+
+            "Array": this.Array.toString()
+        }
+    }
 }
 
 function Outflows(x,y) {
 
-    this.SetArray = (x,y,z) => {
+    this.setArray = (x,y,z) => {
 
-        this.Array = CreateArray(x,y,z);
+        this.Array = new ArrayData(x,y,z);
     }
 
-    this.SetArray(x,y,"0:0:0:0");
+    this.setArray(x,y,"0:0:0:0");
+
+    this.toObject = () => {
+
+        return {
+
+            "Array": this.Array.toString()
+        }
+    }
 }
 
 // functions for ContaminationMap
 
 function ContaminationMap(x,y) {
 
-    this.Contaminations = new Contaminations(x,y);
+    this.setContaminations = (x,y) => {
+
+        this.Contaminations = new Contaminations(x,y);
+    }
+
+    this.setContaminations(x,y);
+
+    this.toObject = () => {
+
+        return {
+
+            "Contaminations": this.Contaminations.toObject()
+        }  
+    }
 }
 
 function Contaminations(x,y) {
 
-    this.SetArray = (x,y,z) => {
+    this.setArray = (x,y,z) => {
 
-        this.Array = CreateArray(x,y,z);
+        this.Array = new ArrayData(x,y,z);
     }
 
-    this.SetArray(x,y,0);
+    this.setArray(x,y,0);
+
+    this.toObject = () => {
+
+        return {
+
+            "Array": this.Array.toString()
+        }
+    }
 }
 
 // functions for SoilMoistureSimulator
 
 function SoilMoistureSimulator(x,y) {
 
-    this.MoistureLevels = new MoistureLevels(x,y);
+    this.setMoistureLevels = (x,y) => {
+
+        this.MoistureLevels = new MoistureLevels(x,y);
+    }
+
+    this.setMoistureLevels(x,y);
+
+    this.toObject = () => {
+
+        return {
+
+            "MoistureLevels": this.MoistureLevels.toObject()
+        }  
+    }
 }
 
 function MoistureLevels(x,y) {
 
-    this.SetArray = (x,y,z) => {
+    this.setArray = (x,y,z) => {
 
-        this.Array = CreateArray(x,y,z);
+        this.Array = new ArrayData(x,y,z);
     }
 
-    this.SetArray(x,y,0);
+    this.setArray(x,y,0);
+
+    this.toObject = () => {
+
+        return {
+
+            "Array": this.Array.toString()
+        }
+    }
 }
 
 // functions for SoilContaminationSimulator
@@ -182,41 +310,88 @@ function SoilContaminationSimulator(x,y) {
 
     this.ContaminationCandidates = new ContaminationCandidates(x,y);
     this.ContaminationLevels = new ContaminationLevels(x,y);
+
+    this.toObject = () => {
+        return {
+
+            "ContaminationCandidates": this.ContaminationCandidates.toObject(),
+            "ContaminationLevels": this.ContaminationLevels.toObject()
+        }
+
+    }
 }
 
 function ContaminationCandidates(x,y) {
 
-    this.SetArray = (x,y,z) => {
+    this.setArray = (x,y,z) => {
 
-        this.Array = CreateArray(x,y,z);
+        this.Array = new ArrayData(x,y,z);
     }
 
-    this.SetArray(x,y,0);
+    this.setArray(x,y,0);
+
+    this.toObject = () => {
+
+        return {
+
+            "Array": this.Array.toString()
+        }
+    }
 }
 
 function ContaminationLevels(x,y) {
 
-    this.SetArray = (x,y,z) => {
+    this.setArray = (x,y,z) => {
 
-        this.Array = CreateArray(x,y,z);
+        this.Array = new ArrayData(x,y,z);
     }
 
-    this.SetArray(x,y,0);
+    this.setArray(x,y,0);
+
+    this.toObject = () => {
+
+        return {
+
+            "Array": this.Array.toString()
+        }
+    }
 }
 
 // functions used for multiple Maps
 
-function CreateArray(x,y,z) {
+function ArrayData(x, y, z) {
 
-    let array = [];
-
-    for(let i = 0; i < x * y; i++)
-    {
-        array.push(z);
+    this.setArray = (x, y, z) => {
+  
+      this.Array = [];
+  
+      for (let xc = 0; xc < x; xc++) {
+  
+        this.Array[xc] = []
+  
+        for (let yc = 0; yc < y; yc++) {
+  
+          this.Array[xc][yc] = z;
+        }
+  
+      }
     }
-
-    return array.join(" ");
-}
+  
+    this.setArray(x, y, z);
+  
+    this.toString = () => {
+  
+      let strings = [];
+  
+      for (let x = 0; x < this.Array.length; x++) {
+      
+        strings[x] = this.Array[x].join(" ");
+      }
+  
+      return strings.join(" ");
+    }
+  
+  }
 
 // functions for MapThumbnailCameraMover
 
@@ -227,24 +402,24 @@ function MapThumbnailCameraMover() {
 
 function CurrentConfiguration() {
     
-    this.SetPosition = (x,y,z) => {
+    this.setPosition = (x,y,z) => {
 
         this.Position = new Position(x,y,z)
     }
 
-    this.SetRotation = (x,y,z,w) => {
+    this.setRotation = (x,y,z,w) => {
 
         this.Rotation = new Rotation(x,y,z,w)
     }
 
-    this.SetShadowDistance = (d) => {
+    this.setShadowDistance = (d) => {
 
         this.ShadowDistance = (d).toFixed(1);
     }
     
-    this.SetPosition(0,0,0);
-    this.SetRotation(0,0,0,0);
-    this.SetShadowDistance(150);
+    this.setPosition(0,0,0);
+    this.setRotation(0,0,0,0);
+    this.setShadowDistance(150);
 }
 
 function Position(x,y,z) {
@@ -275,13 +450,15 @@ function Entity(id,tp) {
 
 let world = new World(4,4);
 
-document.querySelector("#json").textContent = JSON.stringify(world,null,2);
+console.log(world.Singletons.toString())
+
+document.querySelector("#json").textContent = JSON.stringify(world.toObject(),null,2);
 
 // save json to world.json
 
 function Save() {
 
-    var json = JSON.stringify(new World(4,4), null, 4);
+    var json = JSON.stringify((new World(4,4)).toObject(),null,2);
 
     var blob = new Blob([json], {
 
