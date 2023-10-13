@@ -1,0 +1,28 @@
+:root {
+
+    --bg: #202020;
+    --txt: #fff;
+    --code: #101010;
+
+    font-size: 30px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+
+    background:var(--bg); 
+    color: var(--txt);
+    font-family: sans-serif;
+    margin: 0;
+}
+
+pre {
+
+    font-size: 1rem;
+    font-family: "Courier New", monospace;
+    margin: 0;
+    padding: 1rem;
+    background: var(--code);
+
+}
