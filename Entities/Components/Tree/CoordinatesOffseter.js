@@ -4,6 +4,6 @@ export class CoordinatesOffseter {
 
     constructor(x, y) {
         
-        this.CoordinatesOffset = new CoordinatesOffset();
+        this.CoordinatesOffset = new CoordinatesOffset(x, y);
     }
 }
