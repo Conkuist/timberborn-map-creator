@@ -20,16 +20,16 @@ export class Tree extends Entity {
         super(tree);
         this.Components.BlockObject = new BlockObject(x, y, z);
         this.Components.Growable = new Growable();
-        this.NaturalResourceModelRandomizer = new NaturalResourceModelRandomizer();
-        this.CoordinatesOffseter = new CoordinatesOffseter();
-        this.LivingNaturalResource = new LivingNaturalResource();
-        this.ContaminatedNaturalResource = new ContaminatedNaturalResource();
-        this.YielderCuttable = new YielderCuttable();
-        this.DryObject = new DryObject();
-        this.WateredNaturalResource = new WateredNaturalResource();
-        this.GatherableYieldGrower = new GatherableYieldGrower();
-        this.YielderGatherable = new YielderGatherable();
-        this.ContaminatedObject = new ContaminatedObject();
-        this.LivingWaterNaturalResource = new LivingWaterNaturalResource();
+        this.Components.NaturalResourceModelRandomizer = new NaturalResourceModelRandomizer();
+        this.Components.CoordinatesOffseter = new CoordinatesOffseter();
+        this.Components.LivingNaturalResource = new LivingNaturalResource();
+        this.Components.ContaminatedNaturalResource = new ContaminatedNaturalResource();
+        this.Components["Yielder:Cuttable"] = new YielderCuttable();
+        this.Components.DryObject = new DryObject();
+        this.Components.WateredNaturalResource = new WateredNaturalResource();
+        this.Components.GatherableYieldGrower = new GatherableYieldGrower();
+        this.Components["Yielder:Gatherable"] = new YielderGatherable();
+        this.Components.ContaminatedObject = new ContaminatedObject();
+        this.Components.LivingWaterNaturalResource = new LivingWaterNaturalResource();
     }
 }
