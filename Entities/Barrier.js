@@ -3,9 +3,9 @@ import { BlockObject } from "./Components/BlockObject.js";
 
 export class Barrier extends Entity {
 
-    constructor(X, Y, Z, Orientation) {
+    constructor(x, y, z, orientation) {
 
         super("Barrier");
-        this.Components.BlockObject = new BlockObject(X, Y, Z, Orientation);
+        this.Components.BlockObject = new BlockObject(x, y, z, orientation);
     }
 }
