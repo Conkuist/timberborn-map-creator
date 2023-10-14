@@ -2,6 +2,6 @@ export class Growable {
 
     constructor(progress = 1) {
         
-        this.Growthprosgress = progress.toFixed(1);
+        this.GrowthProgress = progress.toFixed(1);
     }
 }
